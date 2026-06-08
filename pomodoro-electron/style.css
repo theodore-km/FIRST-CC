@@ -1,0 +1,234 @@
+/* style.css — 番茄钟样式 */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  font-family: 'Microsoft YaHei UI', 'Segoe UI', sans-serif;
+  background: #1a1a2e;
+  color: #eaeaea;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── 标题栏 ─────────────────────────────────────── */
+
+.titlebar {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px 0 14px;
+  -webkit-app-region: drag;
+  background: #0f0f1e;
+}
+
+.titlebar-text {
+  font-size: 13px;
+  color: #a0a0b0;
+}
+
+.titlebar-buttons {
+  display: flex;
+  gap: 4px;
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: #a0a0b0;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.titlebar-btn:hover {
+  background: #2a2a4e;
+  color: #eaeaea;
+}
+
+#btn-close:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+/* ── 模式切换 ───────────────────────────────────── */
+
+.mode-selector {
+  display: flex;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.mode-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  background: #16213e;
+  color: #a0a0b0;
+  transition: all 0.25s;
+}
+
+.mode-btn:hover {
+  background: #1f2f50;
+  color: #eaeaea;
+}
+
+.mode-btn.active[data-mode="work"] {
+  background: #c0392b;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(192, 57, 43, 0.4);
+}
+
+.mode-btn.active[data-mode="short"] {
+  background: #27ae60;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(39, 174, 96, 0.4);
+}
+
+.mode-btn.active[data-mode="long"] {
+  background: #2980b9;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(41, 128, 185, 0.4);
+}
+
+/* ── 圆形进度 + 时间 ──────────────────────────── */
+
+.timer-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin-top: 30px;
+}
+
+.progress-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  fill: none;
+  stroke: #2a1a15;
+  stroke-width: 8;
+}
+
+.ring-fg {
+  fill: none;
+  stroke: #e74c3c;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 628.32;  /* 2 * PI * 100 */
+  stroke-dashoffset: 0;
+  transition: stroke 0.4s;
+}
+
+.timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 48px;
+  font-weight: bold;
+  color: #eaeaea;
+  letter-spacing: 2px;
+}
+
+/* ── 状态 ─────────────────────────────────────── */
+
+.status {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #a0a0b0;
+  min-height: 20px;
+}
+
+/* ── 按钮 ─────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  padding: 10px 28px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #e74c3c;
+  color: #fff;
+  box-shadow: 0 3px 14px rgba(231, 76, 60, 0.35);
+}
+
+.btn-primary:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+}
+
+.btn-primary.running {
+  background: #f39c12;
+  box-shadow: 0 3px 14px rgba(243, 156, 18, 0.35);
+}
+
+.btn-primary.running:hover {
+  background: #e67e22;
+}
+
+.btn-secondary {
+  background: #16213e;
+  color: #a0a0b0;
+}
+
+.btn-secondary:hover {
+  background: #1f2f50;
+  color: #eaeaea;
+}
+
+/* ── 番茄计数 ─────────────────────────────────── */
+
+.counter {
+  margin-top: 24px;
+  font-size: 18px;
+  min-height: 28px;
+  letter-spacing: 4px;
+}
+
+/* ── 模式主题色 ────────────────────────────────── */
+
+body.mode-work .ring-bg   { stroke: #2a1a15; }
+body.mode-work .ring-fg   { stroke: #e74c3c; }
+body.mode-short .ring-bg  { stroke: #1a3a25; }
+body.mode-short .ring-fg  { stroke: #2ecc71; }
+body.mode-long .ring-bg   { stroke: #152a45; }
+body.mode-long .ring-fg   { stroke: #3498db; }
+
+body.mode-work .btn-primary  { background: #e74c3c; box-shadow: 0 3px 14px rgba(231,76,60,0.35); }
+body.mode-short .btn-primary { background: #2ecc71; box-shadow: 0 3px 14px rgba(46,204,113,0.35); }
+body.mode-long .btn-primary  { background: #3498db; box-shadow: 0 3px 14px rgba(52,152,219,0.35); }

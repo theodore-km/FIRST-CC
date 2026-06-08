@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>打字射击 — Type Shooter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 开始菜单 -->
+  <div id="menu-screen" class="screen active">
+    <div class="menu-container">
+      <h1 class="game-title">⚡ 打字射击</h1>
+      <p class="subtitle">TYPE SHOOTER</p>
+      <div class="mode-select">
+        <button class="mode-btn selected" data-mode="letter">
+          <span class="mode-icon">🔤</span>
+          <span class="mode-name">单字母模式</span>
+          <span class="mode-desc">输入下落的字母击毁目标</span>
+        </button>
+        <button class="mode-btn" data-mode="word">
+          <span class="mode-icon">📝</span>
+          <span class="mode-name">单词模式</span>
+          <span class="mode-desc">输入完整单词消灭敌人</span>
+        </button>
+      </div>
+      <button class="start-btn" id="btn-start">开始游戏</button>
+      <p class="hint">按 Enter 快速开始</p>
+    </div>
+  </div>
+
+  <!-- 游戏画面 -->
+  <div id="game-screen" class="screen">
+    <canvas id="game-canvas"></canvas>
+    <!-- HUD 覆盖层 -->
+    <div id="hud">
+      <div class="hud-left">
+        <span class="hud-score">得分: <strong id="hud-score">0</strong></span>
+        <span class="hud-combo" id="hud-combo"></span>
+      </div>
+      <div class="hud-right">
+        <span class="hud-level" id="hud-level">Lv.1</span>
+        <span class="hud-lives" id="hud-lives">❤️❤️❤️</span>
+      </div>
+    </div>
+    <!-- 输入显示 -->
+    <div id="input-display">
+      <span class="input-prefix" id="input-prefix"></span><span class="input-cursor">|</span>
+    </div>
+  </div>
+
+  <!-- 结束画面 -->
+  <div id="over-screen" class="screen">
+    <div class="over-container">
+      <h2 class="over-title">游戏结束</h2>
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-value" id="stat-score">0</span>
+          <span class="stat-label">总分</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="stat-wpm">0</span>
+          <span class="stat-label">WPM</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="stat-accuracy">0%</span>
+          <span class="stat-label">准确率</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="stat-combo">0</span>
+          <span class="stat-label">最高连击</span>
+        </div>
+      </div>
+      <button class="start-btn" id="btn-restart">再来一局</button>
+      <button class="menu-btn" id="btn-menu">返回菜单</button>
+    </div>
+  </div>
+
+  <script src="assets.js"></script>
+  <script src="entities.js"></script>
+  <script src="input.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

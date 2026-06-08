@@ -1,0 +1,317 @@
+/* style.css — 打字射击游戏样式 */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  background: #0a0a1a;
+  color: #eaeaea;
+  font-family: 'Segoe UI', 'Microsoft YaHei UI', sans-serif;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ── 通用屏幕 ─────────────────────────────────── */
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* ── 菜单 ─────────────────────────────────────── */
+
+.menu-container {
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+.game-title {
+  font-size: 56px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #f39c12, #e74c3c, #9b59b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #555;
+  letter-spacing: 12px;
+  margin-bottom: 40px;
+}
+
+.mode-select {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.mode-btn {
+  background: #111128;
+  border: 2px solid #222244;
+  border-radius: 16px;
+  padding: 20px 28px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+  color: #888;
+  min-width: 180px;
+}
+
+.mode-btn:hover {
+  border-color: #444466;
+  background: #161630;
+}
+
+.mode-btn.selected {
+  border-color: #f39c12;
+  background: #1a1530;
+  color: #eaeaea;
+  box-shadow: 0 0 20px rgba(243, 156, 18, 0.15);
+}
+
+.mode-icon {
+  display: block;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.mode-name {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.mode-desc {
+  display: block;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.start-btn {
+  background: linear-gradient(135deg, #f39c12, #e74c3c);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 48px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  font-family: inherit;
+}
+
+.start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(243, 156, 18, 0.35);
+}
+
+.hint {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #444;
+}
+
+/* ── 游戏 Canvas ──────────────────────────────── */
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #0a0a1a;
+}
+
+/* ── HUD ──────────────────────────────────────── */
+
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hud-left, .hud-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hud-score {
+  font-size: 18px;
+  color: #ccc;
+}
+
+.hud-score strong {
+  color: #f39c12;
+  font-size: 22px;
+}
+
+.hud-combo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #e74c3c;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.hud-combo.visible {
+  opacity: 1;
+}
+
+.hud-level {
+  background: #1a1a3e;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #9b59b6;
+}
+
+.hud-lives {
+  font-size: 18px;
+  letter-spacing: 4px;
+}
+
+/* ── 输入显示 ─────────────────────────────────── */
+
+#input-display {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 28px;
+  font-weight: bold;
+  color: #f39c12;
+  background: rgba(10, 10, 26, 0.8);
+  padding: 8px 24px;
+  border-radius: 12px;
+  border: 2px solid #333;
+  min-width: 120px;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+#input-display.visible {
+  opacity: 1;
+}
+
+#input-display.locked {
+  border-color: #f39c12;
+}
+
+.input-prefix {
+  color: #2ecc71;
+}
+
+.input-cursor {
+  animation: blink 0.8s infinite;
+  color: #888;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── 结束画面 ─────────────────────────────────── */
+
+.over-container {
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.over-title {
+  font-size: 42px;
+  font-weight: 900;
+  color: #e74c3c;
+  margin-bottom: 32px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.stat {
+  background: #111128;
+  border-radius: 12px;
+  padding: 20px 16px;
+  border: 1px solid #222244;
+}
+
+.stat-value {
+  display: block;
+  font-size: 32px;
+  font-weight: 800;
+  color: #f39c12;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #666;
+}
+
+.menu-btn {
+  background: transparent;
+  color: #666;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 10px 32px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 12px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.menu-btn:hover {
+  border-color: #666;
+  color: #aaa;
+}
+
+/* ── 动画 ─────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── 屏幕震动 ─────────────────────────────────── */
+
+.shake {
+  animation: shake 0.15s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
