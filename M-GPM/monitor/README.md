@@ -74,7 +74,7 @@
 
 ## 已知数据坑（重要）
 
-- **11-10 实测**：myanmartradeportal.gov.mm 变「建设中」占位页；commerce.gov.mm 首页可达、深层页 403（反爬）；Eleven 连接失败；mmtimes 域名停摆；GNLM/Shan/Frontier/Irrawaddy/Mizzima 主站 403。**可靠通路：Google News RSS（WebFetch）+ DVB 缅文版 burmese.dvb.no + 各站 RSS**。Facebook 行情图帖始终不可读
+- **11-10 实测**：myanmartradeportal.gov.mm 变「建设中」占位页；commerce.gov.mm 首页可达、深层页 403（反爬）；Eleven 连接失败；mmtimes 域名停摆；GNLM/Shan/Frontier/Irrawaddy/Mizzima 主站 403。**可靠通路：各站 RSS/官网直抓 + DVB 缅文版 burmese.dvb.no**。Google News RSS 仅作发现层（11-10 起已移出 WebFetch 自动放行名单，逐次审批），命中条目后应转抓出版社原域名核实。Facebook 行情图帖始终不可读
 - WebSearch 与 webReader MCP 月配额 11-21 重置；期间直抓一律走内置 WebFetch + curl
 
 - Aung Thamardi 官网价格为 JS 动态加载，抓取常失败 → 依赖媒体转述口径
